@@ -13,3 +13,9 @@ export interface Color{
     color: string;
     pantone_value: string;
 }
+
+
+export interface ColorsResponse {
+    data: Color;
+}
+

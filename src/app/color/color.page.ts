@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+import { Color } from '../model/colormodel';
+import { ColorsService } from '../services/colors.service';
 
 @Component({
   selector: 'app-color',
@@ -6,10 +9,21 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./color.page.scss'],
 })
 export class ColorPage implements OnInit {
-
-  constructor() { }
+  color: Color;
+  constructor(private route: ActivatedRoute, private colorService: ColorsService) {
+    this.route.params.subscribe(parameters => {
+      if (parameters.id){
+          console.log(parameters.id);
+          this.colorService.getSingleColor(parameters.id).subscribe(res => {
+          this.color = res.data;
+          console.log(res.data);
+        });
+      }
+    });
+   }
 
   ngOnInit() {
   }
+
 
 }
